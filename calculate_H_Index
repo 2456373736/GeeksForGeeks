@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int calculateHIndex(std::vector<int>& citations) {
+    // Sort the citations in descending order
+    std::sort(citations.rbegin(), citations.rend());
+
+    int hIndex = 0;
+
+    // Check the condition for each paper
+    for (int i = 0; i < citations.size(); ++i) {
+        if (citations[i] >= i + 1) {
+            hIndex = i + 1;
+        } else {
+            break;
+        }
+    }
+
+    return hIndex;
+}
+
+int main() {
+    std::vector<int> citations1 = {3, 0, 5, 3, 0};
+    std::vector<int> citations2 = {5, 1, 2, 4, 1};
+    std::vector<int> citations3 = {0, 0};
+
+    std::cout << "H-Index for citations1: " << calculateHIndex(citations1) << std::endl;
+    std::cout << "H-Index for citations2: " << calculateHIndex(citations2) << std::endl;
+    std::cout << "H-Index for citations3: " << calculateHIndex(citations3) << std::endl;
+
+    return 0;
+}
